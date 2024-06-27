@@ -18,6 +18,7 @@ public class AuthenticationController : ControllerBase
         _authenticationService = authenticationService;
     }
 
+    [SwaggerOperation(Summary = "Đăng ký")]
     [HttpPost("register")]
     [AllowAnonymous]
     public async Task<IActionResult> Login([FromBody] RegisterModel model) =>
@@ -29,11 +30,13 @@ public class AuthenticationController : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginModel model) =>
         await _authenticationService.Login(model);
 
+    [SwaggerOperation(Summary = "Refresh token")]
     [HttpPost("refresh-token")]
     [AllowAnonymous]
     public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenModel model) =>
         await _authenticationService.RefreshToken(model);
 
+    [SwaggerOperation(Summary = "Lấy thông tin user đang đăng nhập")]
     [HttpGet("current-user-credential")]
     public async Task<IActionResult> GetCurrentUserCredentialInfo() =>
         await _authenticationService.GetCurrentUserCredentialInfo();
